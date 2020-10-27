@@ -37,3 +37,14 @@ def add_view(request):
         Note.objects.create(title=title, content=content, user_id=uid)
         return HttpResponse("添加云笔记成功")
 
+
+def list_view(request):
+    pass
+
+
+def mod_view(request,uid):
+    pass
+
+
+def del_view(request,uid):
+    pass
