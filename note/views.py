@@ -35,16 +35,47 @@ def add_view(request):
         # 获取外键uid
         uid = request.session["uid"]
         Note.objects.create(title=title, content=content, user_id=uid)
-        return HttpResponse("添加云笔记成功")
+        return HttpResponseRedirect("/note")
 
 
+# 装饰器检查登录状态
+@login_check
 def list_view(request):
-    pass
+    # 从session中获取到用户id
+    uid = request.session["uid"]
+    try:
+        user = User.objects.get(id=uid)
+    except:
+        print("uid is error")
+    notes = user.note_set.all()
+    return render(request, "note/list_note.html", locals())
 
 
+@login_check
 def mod_view(request, uid):
-    pass
+    try:
+        note = Note.objects.get(id=uid)
+    except:
+        print("uid is error")
+    if request.method == "GET":
+        return render(request, "note/mod_note.html", locals())
+    elif request.method == "POST":
+        # 获取到页面数据
+        new_title = request.POST["title"]
+        new_content = request.POST["content"]
+        # 更改数据库模型的内容
+        note.title = new_title
+        note.content = new_content
+        # 保存
+        note.save()
+        return HttpResponseRedirect("/note")
 
 
+@login_check
 def del_view(request, uid):
-    pass
+    try:
+        note = Note.objects.get(id=uid)
+    except:
+        print("uid is error")
+    note.delete()
+    return HttpResponseRedirect("/note")

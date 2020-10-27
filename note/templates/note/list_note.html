@@ -5,6 +5,9 @@
     <title>云笔记</title>
 </head>
 <body>
+<b>{{ user.username }} 的云笔记</b>
+<a href="/note/add">添加新的笔记</a>
+<a href="/user/login">返回首页</a>
 <table>
     <tr>
         <td>ID</td>
@@ -16,12 +19,12 @@
     </tr>
     {% for note in notes %}
     <tr>
-        <th>{{ user.id }}</th>
+        <th>{{ note.id }}</th>
         <th>{{ note.title }}</th>
-        <th>{{ note.create_time }}</th>
-        <th>{{ note.update_time }}</th>
-        <th><a href="/note/mod/{{ uid }}">修改</a></th>
-        <th><a href="/note/del/{{ uid }}">删除</a></th>
+        <th>{{ note.created_time }}</th>
+        <th>{{ note.updated_time }}</th>
+        <th><a href="/note/mod/{{ note.id }}">修改</a></th>
+        <th><a href="/note/del/{{ note.id }}">删除</a></th>
     </tr>
     {% endfor %}
 </table>

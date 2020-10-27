@@ -122,4 +122,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # session 保存时间
-SESSION_COOKIE_AGE = 10
+SESSION_COOKIE_AGE = 3600 * 24

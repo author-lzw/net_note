@@ -16,7 +16,7 @@ def login_view(request):
             # return HttpResponse("您已经登录")
         c_uname = request.COOKIES.get("uname")
         c_id = request.COOKIES.get("uid")
-
+        print(c_id, c_uname)
         if c_uname and c_id:
             # cookies中的数据回写session
             request.session["uname"] = c_uname
@@ -48,6 +48,7 @@ def login_view(request):
         resp = HttpResponse("登录成功")
         # 若用户选择了记住我,还要在cookies中保存登录状态
         if "remember" in request.POST:
+            print("------------------------")
             resp.set_cookie("uname", old_user.username, 3600 * 24 * 3)
             resp.set_cookie("uid", old_user.id, 3600 * 24 * 3)
         # 满足以上条件,则登录成功

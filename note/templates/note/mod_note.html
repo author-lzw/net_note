@@ -5,6 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-
+<form method="post" action="/note/mod/{{ note.id }}">
+    <p>
+        主题:<input type="text" name="title" value="{{ note.title }}">
+        <input type="submit" value="保存">
+        <a href="/note">返回列表页</a>
+    </p>
+    <p>
+        <textarea name="content" cols="50" rows="30">{{ note.content }}</textarea>
+    </p>
+</form>
 </body>
 </html>
